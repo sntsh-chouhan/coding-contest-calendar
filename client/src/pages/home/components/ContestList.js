@@ -1,4 +1,5 @@
 import './css/ContestList.css'
+import log from '../../../images/platformLogo.png';
 
 const ContestList = () => {
     return ( 
@@ -6,7 +7,7 @@ const ContestList = () => {
             <h2>happy coding ;)</h2>
             <div className="event-main">
                 <div className="platform-logo">
-
+                    <img src={log} alt="" />
                 </div>
                 <div className="event-details">
                     <p>time: 16/06/2024</p>

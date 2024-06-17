@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 1000px;
 }
 h2{
     margin: 0;
@@ -13,4 +14,12 @@ h2{
     background-color: blue;
     display: flex;
     flex-direction: row;
+}
+.platform-logo{
+    width: 100px;
+    margin: auto 0;
+}
+.platform-logo img{
+    width: 50%;
+    
 }
