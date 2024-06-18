@@ -1,60 +1,40 @@
 // ? API to mongodb function
 
-import https from "https";
-
+// import https from "https";
+import axios from 'axios';
 async function codechef_c () {
-  const url = "https://www.codechef.com/api/list/contests/all";
+    try{
+        // const response = await fetch('https://www.codechef.com/api/list/contests/all/');
+        // if (!response.ok) {
+        //   throw new Error('Network response was not ok');
+        // }
+        // const data = await response.json();
+        // const currentTime = new Date();
+    
+        // // Transform and filter data
+        // return data.future_contests
+        //     .filter(contest => new Date(contest.contest_start_date_iso) > currentTime)
+        //     .map(contest => ({
+        //         host: "codechef",
+        //         name: contest.contest_name,
+        //         vanity: contest.contest_code,
+        //         url: "https://www.codechef.com/" + contest.contest_code,
+        //         startTimeUnix: Math.floor(
+        //             new Date(contest.contest_start_date_iso).getTime() / 1000,
+        //         ),
+        //         duration: contest.contest_duration,
+        //     }));
 
-  const promise = new Promise((resolve, reject) => {
-    https.get(url, function (response) {
-      if (response.statusCode === 200) {
-        resolve(response);
-      } else {
-        reject(new Error("Error getting contests"));
-      }
-    });
-  });
+        const response = await axios.get('https://www.codechef.com/api/list/contests/all/');
 
-  const filteredContestsPromise = promise.then(function (response) {
-    let list = "";
+        // Extracting data from the response
+        const data = response.data;
+        console.log(data);
 
-    response.on("data", function (data) {
-      list += data;
-    });
-
-    return new Promise((resolve) => {
-      response.on("end", function () {
-        try {
-          const contestList = JSON.parse(list.toString());
-          const futureContests = contestList.future_contests;
-          // console.log("Future Contests:", futureContests);
-          const formattedContests = futureContests.map((contest) => ({
-            host: "codechef",
-            name: contest.contest_name,
-            vanity: contest.contest_code,
-            url: "https://www.codechef.com/" + contest.contest_code,
-            // startTimeIST: formatStartTimeIST(contest.contest_start_date_iso),
-            startTimeUnix: Math.floor(
-              new Date(contest.contest_start_date_iso).getTime() / 1000,
-            ),
-            duration: contest.contest_duration,
-          }));
-
-          resolve(formattedContests);
-        } catch (error) {
-          console.log("Error parsing JSON:", error);
-          resolve([]);
-        }
-      });
-    });
-  }).catch((error) => {
-    console.error("Failed to fetch codechef contests:", error);
-    return new Promise((resolve) => {
-      resolve([]);
-    });
-  });
-
-  return filteredContestsPromise;
+    }catch (error) {
+        console.error('Error fetching data from CodeChef API:', error);
+        return [];
+    }
 }
 
 // function formatStartTimeIST (start_time) {

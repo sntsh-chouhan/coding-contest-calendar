@@ -1,6 +1,7 @@
 import https from "https";
 
-async function codeforces_c () {
+ 
+export const codeforces_c = async () =>{
     const url = "https://codeforces.com/api/contest.list";
 
     const promise = new Promise((resolve, reject) => {
@@ -54,6 +55,6 @@ async function codeforces_c () {
     return filteredContestsPromise;
 }
 
-export default {
-    codeforces_c,
-};
+// export default {
+//     codeforces_c,
+// };
